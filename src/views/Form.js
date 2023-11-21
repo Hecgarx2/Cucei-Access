@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, TextInput, TouchableOpacity } from 'react-native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import DatePicker from 'react-native-date-picker';
 import Header from '../componets/Header'
 
@@ -13,7 +15,7 @@ const Form = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <View >
+    <SafeAreaView style={styles.background}>
       <Header titulo={'Registrar cita'}/>
       <Text
         style={styles.text}
@@ -84,7 +86,7 @@ const Form = () => {
         style={styles.boton} >
           <Text style={styles.textButton} >Guardar</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -108,7 +110,11 @@ const styles = StyleSheet.create({
   },
   textButton:{
     fontWeight: 'bold'
-  }
+  },
+  background:{
+    height: hp('100%'),
+    backgroundColor: '#2D74A7',
+  },
 });
 
 export default Form;

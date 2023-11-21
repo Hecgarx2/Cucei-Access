@@ -1,10 +1,11 @@
 import { View, Text, Image, StyleSheet } from 'react-native'
 import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const Header = ({titulo}) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.leftContairner}>
         <Text style={styles.titule}>{titulo}</Text>
       </View>
@@ -13,7 +14,7 @@ const Header = ({titulo}) => {
             style={styles.imgHeaderLogo}
         />
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 

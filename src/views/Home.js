@@ -1,44 +1,54 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Header from '../componets/Header'
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
-    <View>
+    <SafeAreaView style={styles.background}>
         <Header titulo={'Home'}/>
-        <TouchableOpacity
-            style={styles.boton} >
-            <Text style={styles.textButton} >Registar cita</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-            style={styles.boton} >
-            <Text style={styles.textButton} >Buscar cita</Text>
-        </TouchableOpacity>
-    </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+              style={styles.boton} 
+              onPress={() => navigation.navigate('Form')}
+              >
+              <Text style={styles.textButton} >Registar cita</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+              style={styles.boton} >
+              <Text style={styles.textButton} >Buscar cita</Text>
+          </TouchableOpacity>
+        </View>
+    </SafeAreaView>
   )
 }
 
 export default Home
-
+//2d74a7
 const styles = StyleSheet.create({
     boton:{
-        borderWidth: 1,
         width: 250,
-        height: 30,
+        height: 50,
+        borderWidth: 2,
         backgroundColor: "#595C64",
         borderRadius: 40,
         marginTop: 20,
-        marginLeft: 70,
         alignItems: 'center',
         padding: 5,
       },
-    text:{
+    textButton:{
+        fontWeight: 'bold',
         fontSize: 20,
-        marginLeft: 20,
         color: 'white',
         padding: 5,
+        textAlign: 'center',
       },
-    textButton:{
-        fontWeight: 'bold'
-      }
+    background:{
+        height: hp('100%'),
+        backgroundColor: '#2D74A7',
+    },
+    container:{
+      alignItems: 'center'
+    }
 })

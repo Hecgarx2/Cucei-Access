@@ -7,17 +7,16 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
 } from 'react-native';
-import Form from './src/views/Form';
-import Home from './src/views/Home';
+import Home from './src/routes/Routes';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView> 
+    <SafeAreaProvider> 
       <Home />
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
