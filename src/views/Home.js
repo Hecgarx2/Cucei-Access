@@ -16,7 +16,9 @@ const Home = ({navigation}) => {
               <Text style={styles.textButton} >Registar cita</Text>
           </TouchableOpacity>
           <TouchableOpacity
-              style={styles.boton} >
+              style={styles.boton} 
+              onPress={() => navigation.navigate('Search')}
+              >
               <Text style={styles.textButton} >Buscar cita</Text>
           </TouchableOpacity>
         </View>
