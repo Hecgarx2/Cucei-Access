@@ -50,6 +50,7 @@ const Form = ( {navigation} ) => {
     xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/registrarCita.php?nombre="+nombre+
     "&apellido="+apellido+"&marca="+marca+"&placa="+placa+"&puerta="+numPuerta+"&fecha="+fechaFormateada, true);
     xhttp.send();
+    Alert.alert("Registro insertado");
     navigation.navigate('Home')
             //Agregar codigo de XMLHttpRequest de w3school///
   }
@@ -187,7 +188,6 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   background:{
-    width: wp('100%'),
     height: hp('100%'),
     backgroundColor: '#2D74A7',
   },

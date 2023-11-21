@@ -1,5 +1,4 @@
 <?php
-    // ------------ Php de webHost -------------
     //variable interna = variable externa
     $nombre = $_GET['nombre'];
     $apellido = $_GET['apellido'];
@@ -18,13 +17,13 @@
     }
     //crear la sentencia
     if($puerta == 1){
-        $sql="INSERT INTO Puerta1(Nombre,Apellido,Marca,Placa)VALUES('$nombre','$apellido','$marca','$placa')";
+        $sql="INSERT INTO Puerta1(Nombre,Apellido,Marca,Placa,Fecha)VALUES('$nombre','$apellido','$marca','$placa','$fecha')";
     }
     else if($puerta == 2){
-        $sql="INSERT INTO Puerta2(Nombre,Apellido,Marca,Placa)VALUES('$nombre','$apellido','$marca','$placa')";
+        $sql="INSERT INTO Puerta2(Nombre,Apellido,Marca,Placa,Fecha)VALUES('$nombre','$apellido','$marca','$placa','$fecha')";
     }
     else {
-        $sql="INSERT INTO Puerta3(Nombre,Apellido,Marca,Placa)VALUES('$nombre','$apellido','$marca','$placa')";
+        $sql="INSERT INTO Puerta3(Nombre,Apellido,Marca,Placa,Fecha)VALUES('$nombre','$apellido','$marca','$placa','$fecha')";
     }
     //ejecutar sentencia
     if(mysqli_query($cone,$sql)){
