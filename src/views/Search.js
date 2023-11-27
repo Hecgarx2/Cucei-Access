@@ -38,7 +38,8 @@ const Search = ({navigation}) => {
               else{
                 var datos = JSON.parse(xhttp.responseText);
                 navigation.navigate("Edit", {
-                  appointment: datos
+                  appointment: datos,
+                  numPuerta: numPuerta
                 })
               }
           }

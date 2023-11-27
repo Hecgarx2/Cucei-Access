@@ -8,7 +8,9 @@ import Header from '../componets/Header'
 
 const Edit = ({route, navigation}) => {
     const datos = route.params.appointment;
+    const num = route.params.numPuerta;
     console.log(datos.Id)
+    console.log(num)
     const [nombre, changeName] = useState(datos.Nombre);
     const [apellido, changeLastName] = useState(datos.Apellido);
     const [marca, changeBrand] = useState(datos.Marca);
@@ -34,29 +36,27 @@ const Edit = ({route, navigation}) => {
       changeNumberDoor(key);
       console.log(numPuerta);
     };
-  
-    const buscarCita = () => {
+
+    const eliminarCita = () => {
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
               // Typical action to ve performed when the document is ready
               console.log(xhttp.responseText);
-              if (xhttp.responseText === "0") {
-                  Alert.alert("Cita no encontrada: Error en la puerta selecionada");
+              var datos = JSON.parse(xhttp.responseText);
+              if (datos.Id === -1) {
+                  Alert.alert(datos.error);
               }
-              else if (xhttp.responseText === "2") {
-                  Alert.alert("Cita no encontrada: Error en el nombre o apellido");
+              else{
+                Alert.alert(datos.Mensaje);
+                navigation.navigate('Home');
               }
           }
       };
-      fechaFormateada = date.toISOString().slice(0, 19).replace('T', ' ');    //Formateo fecha a un formato datetime para MySQL
-      console.log([fechaFormateada, nombre, apellido, marca, placa, numPuerta, date])
-      xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/registrarCita.php?nombre="+nombre+
-      "&apellido="+apellido+"&marca="+marca+"&placa="+placa+"&puerta="+numPuerta+"&fecha="+fechaFormateada, true);
+      xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/eliminarCita.php?id="+datos.Id+
+      "&puerta="+num, true);
       xhttp.send();
-      Alert.alert("Registro insertado");
       navigation.navigate('Home')
-              //Agregar codigo de XMLHttpRequest de w3school///
     }
   
     return (
@@ -151,6 +151,7 @@ const Edit = ({route, navigation}) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.boton}
+              onPress={eliminarCita}
               >
                 <Text style={styles.textButton} >Eliminar</Text>
             </TouchableOpacity>
