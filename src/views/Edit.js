@@ -9,6 +9,7 @@ import Header from '../componets/Header'
 const Edit = ({route, navigation}) => {
     const datos = route.params.appointment;
     const num = route.params.numPuerta;
+    const door = route.params.Puerta;
     console.log(datos.Id)
     console.log(num)
     const [nombre, changeName] = useState(datos.Nombre);
@@ -17,7 +18,7 @@ const Edit = ({route, navigation}) => {
     const [placa, changePlate] = useState(datos.Placa);
     const [color, changeColor] = useState(datos.Color);
     const [modulo, changeModule] = useState(datos.Modulo);
-    const [puerta, changeDoor] = useState('Seleciona una puerta');
+    const [puerta, changeDoor] = useState(door);
     const [numPuerta, changeNumberDoor] = useState(0);
     const [date, setDate] = useState(new Date());
     const [open, setOpen] = useState(false);
@@ -26,7 +27,7 @@ const Edit = ({route, navigation}) => {
       {key: 2, label: 'Puerta 2: Boulevard'},
       {key: 3, label: 'Puerta 3: Revolución'},
     ]
-  
+
     const changeText = (text) => {
       changeDoor(text);
       console.log(text);
@@ -57,6 +58,29 @@ const Edit = ({route, navigation}) => {
       "&puerta="+num, true);
       xhttp.send();
       navigation.navigate('Home')
+    }
+
+    const actualizarCita = () => {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              // Typical action to ve performed when the document is ready
+              console.log(xhttp.responseText);
+              var datos = JSON.parse(xhttp.responseText);
+              if (datos.Id === -1) {
+                  Alert.alert(datos.error);
+              }
+              else{
+                console.log([fechaFormateada, nombre, apellido, marca, placa, color, numPuerta, date, modulo])
+                Alert.alert("Registro actualizado");
+                navigation.navigate('Home');
+              }
+          }
+      };
+      fechaFormateada = date.toISOString().slice(0, 19).replace('T', ' ');    //Formateo fecha a un formato datetime para MySQL
+      xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/actualizarCita.php?id="+datos.Id+"&nombre="+nombre+
+      "&apellido="+apellido+"&marca="+marca+"&placa="+placa+"&color="+color+"&puerta="+numPuerta+"&fecha="+fechaFormateada+"&modulo="+modulo, true);
+      xhttp.send();
     }
   
     return (
@@ -146,6 +170,7 @@ const Edit = ({route, navigation}) => {
           <View style={styles.container}>
             <TouchableOpacity
               style={styles.boton}
+              onPress={actualizarCita}
               >
                 <Text style={styles.textButton} >Actualizar</Text>
             </TouchableOpacity>

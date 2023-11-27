@@ -26,6 +26,14 @@ const Search = ({navigation}) => {
 
   const buscarCita = () => {
     if (numPuerta != 0) {
+      if (numPuerta == 1) {
+        door = 'Puerta 1: Olimpica'
+      }
+      else if (numPuerta == 2) {
+        door = 'Puerta 2: Boulevard'
+      } else {
+        door = 'Puerta 3: Revolución'
+      }
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
@@ -39,7 +47,8 @@ const Search = ({navigation}) => {
                 var datos = JSON.parse(xhttp.responseText);
                 navigation.navigate("Edit", {
                   appointment: datos,
-                  numPuerta: numPuerta
+                  numPuerta: numPuerta,
+                  Puerta: door
                 })
               }
           }
