@@ -18,12 +18,10 @@ const Search = ({navigation}) => {
 
   const changeText = (text) => {
     changeDoor(text);
-    console.log(text);
   };
 
   const changeKey = (key) => {
     changeNumberDoor(key);
-    console.log(numPuerta);
   };
 
   const buscarCita = () => {
@@ -39,13 +37,6 @@ const Search = ({navigation}) => {
               }
               else{
                 var datos = JSON.parse(xhttp.responseText);
-                console.log(datos.Nombre);
-                console.log(datos.Apellido);
-                console.log(datos.Fecha);
-                console.log(datos.Marca);
-                console.log(datos.Placa);
-                console.log(datos.Color);
-                console.log(datos.Modulo);
                 navigation.navigate("Edit", {
                   appointment: datos
                 })

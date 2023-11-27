@@ -6,12 +6,15 @@ import ModalSelector from 'react-native-modal-selector'
 import DatePicker from 'react-native-date-picker';
 import Header from '../componets/Header'
 
-const Edit = ({appointment, navigation}) => {
-    const datos = appointment.datos
+const Edit = ({route, navigation}) => {
+    const datos = route.params.appointment;
+    console.log(datos.Id)
     const [nombre, changeName] = useState(datos.Nombre);
     const [apellido, changeLastName] = useState(datos.Apellido);
     const [marca, changeBrand] = useState(datos.Marca);
     const [placa, changePlate] = useState(datos.Placa);
+    const [color, changeColor] = useState(datos.Color);
+    const [modulo, changeModule] = useState(datos.Modulo);
     const [puerta, changeDoor] = useState('Seleciona una puerta');
     const [numPuerta, changeNumberDoor] = useState(0);
     const [date, setDate] = useState(new Date());
@@ -60,7 +63,7 @@ const Edit = ({appointment, navigation}) => {
       <SafeAreaView style={styles.background}>
         <Header titulo={'Editar o Eliminar cita'}/>
         
-        <ScrollView style={styles.scroll}>
+      <ScrollView style={styles.scroll}>
         <View style={styles.main}>
           <View style={styles.container}>
             <ModalSelector
@@ -115,31 +118,41 @@ const Edit = ({appointment, navigation}) => {
               value={apellido}
               style={styles.textInput}
             />
-            <Text style={styles.text}>Marca:</Text>
+            <Text style={styles.text}>Modulo:</Text>
+            <TextInput
+              onChangeText={changeModule}
+              value={modulo}
+              style={styles.textInput}
+            />
+            <Text style={styles.text}>Marca {'('}Opcional{')'}:</Text>
             <TextInput
               onChangeText={changeBrand}
               value={marca}
               style={styles.textInput}
             />
-            <Text style={styles.text}>Placa:</Text>
+            <Text style={styles.text}>Placa {'('}Opcional{')'}:</Text>
             <TextInput
               onChangeText={changePlate}
               value={placa}
               style={styles.textInput}
             />
-            <Text style={styles.text}>Modulo:</Text>
+            <Text style={styles.text}>Color {'('}Opcional{')'}:</Text>
             <TextInput
-              onChangeText={changePlate}
-              value={placa}
+              onChangeText={changeColor}
+              value={color}
               style={styles.textInput}
             />
           </View>
           <View style={styles.container}>
             <TouchableOpacity
-              style={styles.boton} 
-              onPress={registrarCita}
+              style={styles.boton}
               >
-                <Text style={styles.textButton} >Guardar</Text>
+                <Text style={styles.textButton} >Actualizar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.boton}
+              >
+                <Text style={styles.textButton} >Eliminar</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -201,7 +214,8 @@ const styles = StyleSheet.create({
   },
   main:{
     height: hp('100%'),
-    width: wp('100%')
+    width: wp('100%'),
+    marginBottom: 300
   }
 });
 
