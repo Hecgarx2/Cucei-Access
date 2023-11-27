@@ -4,7 +4,7 @@ import Header from '../componets/Header'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const Home = ({navigation}) => {
+function Home({navigation}) {
   return (
     <SafeAreaView style={styles.background}>
         <Header titulo={'Home'}/>
