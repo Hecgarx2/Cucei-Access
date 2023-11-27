@@ -32,6 +32,7 @@
             $response = [
                 'Id' => $row['Id'],
                 'Nombre' => $row['Nombre'],
+                'Apellido' => $row['Apellido'],
                 'Fecha' => $row['Fecha'],
                 'Marca' => $row['Marca'],
                 'Placa' => $row['Placa'],

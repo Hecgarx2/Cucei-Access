@@ -6,11 +6,12 @@ import ModalSelector from 'react-native-modal-selector'
 import DatePicker from 'react-native-date-picker';
 import Header from '../componets/Header'
 
-const Edit = () => {
-    const [nombre, changeName] = useState('');
-    const [apellido, changeLastName] = useState('');
-    const [marca, changeBrand] = useState('');
-    const [placa, changePlate] = useState('');
+const Edit = ({appointment, navigation}) => {
+    const datos = appointment.datos
+    const [nombre, changeName] = useState(datos.Nombre);
+    const [apellido, changeLastName] = useState(datos.Apellido);
+    const [marca, changeBrand] = useState(datos.Marca);
+    const [placa, changePlate] = useState(datos.Placa);
     const [puerta, changeDoor] = useState('Seleciona una puerta');
     const [numPuerta, changeNumberDoor] = useState(0);
     const [date, setDate] = useState(new Date());
@@ -59,7 +60,8 @@ const Edit = () => {
       <SafeAreaView style={styles.background}>
         <Header titulo={'Editar o Eliminar cita'}/>
         
-        <ScrollView>
+        <ScrollView style={styles.scroll}>
+        <View style={styles.main}>
           <View style={styles.container}>
             <ModalSelector
               data={data}
@@ -80,7 +82,7 @@ const Edit = () => {
                   
                   />
             </ModalSelector>
-  
+
             <TouchableOpacity
               style={styles.boton}
               onPress={() => setOpen(true)} >
@@ -101,41 +103,31 @@ const Edit = () => {
             />
           </View>
           <View style={styles.form}>
-            <Text
-              style={styles.text}
-            >
-              Nombre:
-            </Text>
+            <Text style={styles.text}>Nombre:</Text>
             <TextInput
               onChangeText={changeName}
               value={nombre}
               style={styles.textInput}
             />
-            <Text
-              style={styles.text}
-            >
-              Apellido:
-            </Text>
+            <Text style={styles.text}>Apellido:</Text>
             <TextInput
               onChangeText={changeLastName}
               value={apellido}
               style={styles.textInput}
             />
-            <Text
-              style={styles.text}
-            >
-              Marca:
-            </Text>
+            <Text style={styles.text}>Marca:</Text>
             <TextInput
               onChangeText={changeBrand}
               value={marca}
               style={styles.textInput}
             />
-            <Text
-              style={styles.text}
-            >
-              Placa:
-            </Text>
+            <Text style={styles.text}>Placa:</Text>
+            <TextInput
+              onChangeText={changePlate}
+              value={placa}
+              style={styles.textInput}
+            />
+            <Text style={styles.text}>Modulo:</Text>
             <TextInput
               onChangeText={changePlate}
               value={placa}
@@ -150,59 +142,67 @@ const Edit = () => {
                 <Text style={styles.textButton} >Guardar</Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
-  
-      </SafeAreaView>
-  )
-}
-
-export default Edit
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
-    modal:{
-        fontSize: 20,
-        color: 'white',
-        padding: 5,
-        borderWidth: 2
-      },
-      boton:{
-        borderWidth: 1,
-        width: 250,
-        height: 50,
-        backgroundColor: "#595C64",
-        borderRadius: 40,
-        marginTop: 20,
-        alignItems: 'center',
-        padding: 5,
-        color: 'white'
-      },
-      text:{
-        fontSize: 20,
-        textAlign: 'left',
-        color: 'white',
-        padding: 5,
-      },
-      textButton:{
-        fontWeight: 'bold',
-        fontSize: 20,
-        color: 'white',
-        padding: 5,
-        textAlign: 'center'
-      },
-      background:{
-        height: hp('100%'),
-        backgroundColor: '#2D74A7',
-      },
-      textInput:{
-        fontWeight: 'bold',
-        fontSize: 20,
-        color: 'white',
-      },
-      container:{
-        alignItems: 'center'
-      },
-      form:{
-        marginHorizontal: 10,
-        marginTop: 10
-      }
-})
+  modal:{
+    fontSize: 20,
+    color: 'white',
+    padding: 5,
+    borderWidth: 2
+  },
+  boton:{
+    borderWidth: 1,
+    width: 250,
+    height: 50,
+    backgroundColor: "#595C64",
+    borderRadius: 40,
+    marginTop: 20,
+    alignItems: 'center',
+    padding: 5,
+    color: 'white'
+  },
+  text:{
+    fontSize: 20,
+    textAlign: 'left',
+    color: 'white',
+    padding: 5,
+  },
+  textButton:{
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'white',
+    padding: 5,
+    textAlign: 'center'
+  },
+  background:{
+    height: hp('100%'),
+    backgroundColor: '#2D74A7',
+  },
+  textInput:{
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'white',
+  },
+  container:{
+    alignItems: 'center'
+  },
+  form:{
+    marginHorizontal: 10,
+    marginTop: 10
+  },
+  scroll:{
+    height: hp('100%'),
+    width: wp('100%')
+  },
+  main:{
+    height: hp('100%'),
+    width: wp('100%')
+  }
+});
+
+export default Edit;

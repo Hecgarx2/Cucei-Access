@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ModalSelector from 'react-native-modal-selector'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const Search = () => {
+const Search = ({navigation}) => {
   const data = [
     {key: 1, label: 'Puerta 1: Olimpica'},
     {key: 2, label: 'Puerta 2: Boulevard'},
@@ -40,11 +40,15 @@ const Search = () => {
               else{
                 var datos = JSON.parse(xhttp.responseText);
                 console.log(datos.Nombre);
+                console.log(datos.Apellido);
                 console.log(datos.Fecha);
                 console.log(datos.Marca);
                 console.log(datos.Placa);
                 console.log(datos.Color);
                 console.log(datos.Modulo);
+                navigation.navigate("Edit", {
+                  appointment: datos
+                })
               }
           }
       };
