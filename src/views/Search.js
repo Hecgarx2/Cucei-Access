@@ -27,84 +27,92 @@ const Search = () => {
   };
 
   const buscarCita = () => {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // Typical action to ve performed when the document is ready
-            console.log(xhttp.responseText);
-            if (xhttp.responseText === "0") {
-                Alert.alert("Cita no encontrada: Error en la puerta selecionada");
-            }
-            else if (xhttp.responseText === "2") {
-                Alert.alert("Cita no encontrada: Error en el nombre o apellido");
-            }
-            else{
+    if (numPuerta != 0) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              // Typical action to ve performed when the document is ready
+              console.log(xhttp.responseText);
               var datos = JSON.parse(xhttp.responseText);
-              console.log(datos.Nombre);
-              console.log(datos.Fecha);
-              console.log(datos.Marca);
-              console.log(datos.Placa);
-              console.log(datos.Color);
-              console.log(datos.Modulo);
-            }
-        }
-    };
-   
-    xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/buscarCita.php?nombre="+nombre+
-    "&apellido="+apellido+"&puerta="+numPuerta, true);
-    xhttp.send();
-            //Agregar codigo de XMLHttpRequest de w3school///
+              if (datos.Id === -1) {
+                  Alert.alert(datos.error);
+              }
+              else{
+                var datos = JSON.parse(xhttp.responseText);
+                console.log(datos.Nombre);
+                console.log(datos.Fecha);
+                console.log(datos.Marca);
+                console.log(datos.Placa);
+                console.log(datos.Color);
+                console.log(datos.Modulo);
+              }
+          }
+      };
+    
+      xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/buscarCita.php?nombre="+nombre+
+      "&apellido="+apellido+"&puerta="+numPuerta, true);
+      xhttp.send();
+    } else {
+      Alert.alert("Puerta no elegida: Error en la puerta selecionada");
+    }
+    
   }
 
   return (
     <SafeAreaView style={styles.background}>
         <Header titulo={'Buscar cita'}/>
-        <View style={styles.container}>
-          <ModalSelector
-            data={data}
-            supportedOrientations={['landscape']}
-            accessible={true}
-            cancelButtonAccessibilityLabel={'Cancelar'}
-            style={styles.boton}
-            onChange={(option)=>{ 
-              changeText(option.label)
-              changeKey(option.key)
-            }}
+        <View>
+          <View style={styles.container}>
+            <ModalSelector
+              data={data}
+              supportedOrientations={['landscape']}
+              accessible={true}
+              cancelButtonAccessibilityLabel={'Cancelar'}
+              style={styles.boton}
+              onChange={(option)=>{ 
+                changeText(option.label)
+                changeKey(option.key)
+              }}
+              >
+              <TextInput
+                  style={styles.textButton}
+                  editable={false}
+                  onChange={changeDoor}
+                  value={puerta} 
+                  
+                  />
+            </ModalSelector>
+          </View>
+          <View style={styles.form}>
+            <Text
+              style={styles.text}
             >
+              Nombre:
+            </Text>
             <TextInput
-                style={styles.textButton}
-                editable={false}
-                onChange={changeDoor}
-                value={puerta} 
-                
-                />
-          </ModalSelector>
-          <Text
-            style={styles.text}
-          >
-            Nombre:
-          </Text>
-          <TextInput
-            onChangeText={changeName}
-            value={nombre}
-            style={styles.textInput}
-          />
-          <Text
-            style={styles.text}
-          >
-            Apellido:
-          </Text>
-          <TextInput
-            onChangeText={changeLastName}
-            value={apellido}
-            style={styles.textInput}
-          />
-          <TouchableOpacity
-            style={styles.boton}
-            onPress={buscarCita}
+              onChangeText={changeName}
+              value={nombre}
+              style={styles.textInput}
+            />
+            <Text
+              style={styles.text}
             >
-              <Text style={styles.textButton} >Buscar</Text>
-          </TouchableOpacity>
+              Apellido:
+            </Text>
+            <TextInput
+              onChangeText={changeLastName}
+              value={apellido}
+              style={styles.textInput}
+            />
+            <View style={styles.container}>
+              <TouchableOpacity
+                style={styles.boton}
+                onPress={buscarCita}
+                >
+                  <Text style={styles.textButton} >Buscar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
     </SafeAreaView>
   )
@@ -137,17 +145,21 @@ const styles = StyleSheet.create({
     padding: 5,
     textAlign: 'center'
   },
-    background:{
-        width: wp('100%'),
-        height: hp('100%'),
-        backgroundColor: '#2D74A7',
-    },
-    textInput:{
-        fontWeight: 'bold',
-        fontSize: 20,
-        color: 'white',
-    },
-    container:{
-      alignItems: 'center'
-    },
+  background:{
+      width: wp('100%'),
+      height: hp('100%'),
+      backgroundColor: '#2D74A7',
+  },
+  textInput:{
+      fontWeight: 'bold',
+      fontSize: 20,
+      color: 'white',
+  },
+  container:{
+    alignItems: 'center'
+  },
+  form:{
+    marginHorizontal: 10,
+    marginTop: 10
+  }
 })
