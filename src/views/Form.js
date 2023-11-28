@@ -32,26 +32,47 @@ const Form = ( {navigation} ) => {
     changeNumberDoor(key);
   };
 
+  const validData = () => {
+    if (nombre == '') {
+      Alert.alert("Error: Nombre obligatorio");
+      return;
+    }
+    else if (apellido == '') {
+      Alert.alert("Error: Apellido obligatorio");
+      return;
+    }
+    else if (modulo == '') {
+      Alert.alert("Error: Modulo obligatorio");
+      return;
+    } else{
+      registrarCita();
+    }
+  }
+
   const registrarCita = () => {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // Typical action to ve performed when the document is ready
-            console.log(xhttp.responseText);
-            if (xhttp.responseText === "1") {
-                console.log([fechaFormateada, nombre, apellido, marca, placa, color, numPuerta, date, modulo])
-                Alert.alert("Registro insertado");
-                navigation.navigate('Home')
-            }
-            else{
-                Alert.alert("Error");
-            }
-        }
-    };
-    fechaFormateada = date.toISOString().slice(0, 19).replace('T', ' ');    //Formateo fecha a un formato datetime para MySQL
-    xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/registrarCita.php?nombre="+nombre+
-    "&apellido="+apellido+"&marca="+marca+"&placa="+placa+"&color="+color+"&puerta="+numPuerta+"&fecha="+fechaFormateada+"&modulo="+modulo, true);
-    xhttp.send();
+    if (numPuerta != 0) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              // Typical action to ve performed when the document is ready
+              console.log(xhttp.responseText);
+              if (xhttp.responseText === "1") {
+                  console.log([fechaFormateada, nombre, apellido, marca, placa, color, numPuerta, date, modulo])
+                  Alert.alert("Registro insertado");
+                  navigation.navigate('Home')
+              }
+              else{
+                  Alert.alert("Error");
+              }
+          }
+      };
+      fechaFormateada = date.toISOString().slice(0, 19).replace('T', ' ');    //Formateo fecha a un formato datetime para MySQL
+      xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/registrarCita.php?nombre="+nombre+
+      "&apellido="+apellido+"&marca="+marca+"&placa="+placa+"&color="+color+"&puerta="+numPuerta+"&fecha="+fechaFormateada+"&modulo="+modulo, true);
+      xhttp.send();
+    } else {
+      Alert.alert("Puerta no elegida: Error en la puerta selecionada");
+    }
   }
 
   return (
@@ -141,7 +162,7 @@ const Form = ( {navigation} ) => {
           <View style={styles.container}>
             <TouchableOpacity
               style={styles.boton} 
-              onPress={registrarCita}
+              onPress={validData}
               >
                 <Text style={styles.textButton} >Guardar</Text>
             </TouchableOpacity>
