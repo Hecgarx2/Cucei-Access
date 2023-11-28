@@ -6,8 +6,8 @@
     
     // Obtén la fecha actual y la hora actual
     $fechaActual = date('Y-m-d H:i:s');
-    $fechaLimiteInferior = date('Y-m-d H:i:s', strtotime('-10 minutes', strtotime($fechaActual)));
-    $fechaLimiteSuperior = date('Y-m-d H:i:s', strtotime('+10 minutes', strtotime($fechaActual)));
+    $fechaLimiteInferior = date('Y-m-d H:i:s', strtotime('-11 minutes', strtotime($fechaActual)));
+    $fechaActual = date('Y-m-d');
     
     //variable interna = variable externa
     $puerta = $_GET['puerta'];
@@ -22,13 +22,16 @@
     }
     //crear la sentencia
     if ($puerta == 1) {
-        $sql = "SELECT * FROM Puerta1 WHERE Fecha BETWEEN '$fechaLimiteInferior' AND '$fechaLimiteSuperior' ORDER BY Fecha";
+        $sql = "SELECT * FROM Puerta1 WHERE Fecha < '$fechaLimiteInferior' 
+        AND DATE(Fecha) = '$fechaActual' ORDER BY Fecha";
     }
     else if ($puerta == 2) {
-        $sql = "SELECT * FROM Puerta2 WHERE Fecha BETWEEN '$fechaLimiteInferior' AND '$fechaLimiteSuperior' ORDER BY Fecha";
+        $sql = "SELECT * FROM Puerta2 WHERE Fecha < '$fechaLimiteInferior'
+        AND DATE(Fecha) = '$fechaActual' ORDER BY Fecha";
     }
     else {
-        $sql = "SELECT * FROM Puerta3 WHERE Fecha BETWEEN '$fechaLimiteInferior' AND '$fechaLimiteSuperior' ORDER BY Fecha";
+        $sql = "SELECT * FROM Puerta3 WHERE Fecha < '$fechaLimiteInferior'
+        AND DATE(Fecha) = '$fechaActual' ORDER BY Fecha";
     }
     $result = mysqli_query($cone,$sql);
     if(mysqli_num_rows($result)>0){
