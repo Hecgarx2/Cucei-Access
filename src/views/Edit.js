@@ -78,7 +78,7 @@ const Edit = ({route, navigation}) => {
           }
       };
       fechaFormateada = date.toISOString().slice(0, 19).replace('T', ' ');    //Formateo fecha a un formato datetime para MySQL
-      xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/actualizarCita.php?id="+datos.Id+"&nombre="+nombre+
+      xhttp.open("GET", "https://cuceiaccess.000webhostapp.com/actualizarCita.php?id="+datos.Id+"&nombre="+nombre+
       "&apellido="+apellido+"&marca="+marca+"&placa="+placa+"&color="+color+"&puerta="+numPuerta+"&fecha="+fechaFormateada+"&modulo="+modulo, true);
       xhttp.send();
     }
