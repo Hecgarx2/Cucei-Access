@@ -22,7 +22,7 @@
         echo json_encode(['error' => 'Puerta no válida']);
         exit;
     }
-    $result = mysqli_query($conexion,$sql);
+    $result = mysqli_query($cone,$sql);
     if(mysqli_num_rows($result)>0){
         while($row = mysqli_fetch_assoc($result)){
             $response = [

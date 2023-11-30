@@ -14,7 +14,7 @@
     else {
         $sql = "DELETE FROM Puerta3 WHERE Id = '$id'";
     }
-    $result = mysqli_query($conexion,$sql);
+    $result = mysqli_query($cone,$sql);
     if($result){
         $response = [
             'Id' => $id,
