@@ -54,7 +54,7 @@ const Edit = ({route, navigation}) => {
               }
           }
       };
-      xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/eliminarCita.php?id="+datos.Id+
+      xhttp.open("GET", "https://cuceiaccess.000webhostapp.com/eliminarCita.php?id="+datos.Id+
       "&puerta="+num, true);
       xhttp.send();
       navigation.navigate('Home')

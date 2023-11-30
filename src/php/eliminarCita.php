@@ -1,17 +1,10 @@
 <?php
+    //Conexion con la base de datos
+    require_once 'conexion.php';
     //variable interna = variable externa
     $id = $_GET['id'];
     $puerta = $_GET['puerta'];
-    //Informacion de la base de datos
-    $server = "localhost";          
-    $user = "id21265121_hector";
-    $pass = "H3ct0r_db";
-    $bd = "id21265121_db_1";
-    //Conexion con la base de datos
-    $conexion = mysqli_connect($server,$user,$pass,$bd);
-    if(!$conexion){
-        die("Error al conectarse al server");
-    }
+    
     if ($puerta == 1) {
         $sql = "DELETE FROM Puerta1 WHERE Id = '$id'";
     }

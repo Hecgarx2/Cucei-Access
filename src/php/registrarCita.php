@@ -1,4 +1,5 @@
 <?php
+    require_once 'conexion.php';
     //variable interna = variable externa
     $nombre = $_GET['nombre'];
     $apellido = $_GET['apellido'];
@@ -8,15 +9,7 @@
     $puerta = $_GET['puerta'];
     $fecha = $_GET['fecha'];
     $modulo = $_GET['modulo'];
-    //datos de conexion
-    $server = "localhost";
-    $user = "id21265121_hector";
-    $pass = "H3ct0r_db";
-    $bd = "id21265121_db_1";
-    $cone = mysqli_connect($server,$user,$pass,$bd);
-    if(!$cone){
-        die("Error al conectar");
-    }
+    
     //crear la sentencia
     if($puerta == 1){
         $sql="INSERT INTO Puerta1(Nombre,Apellido,Marca,Placa,Color,Fecha,Modulo)VALUES('$nombre','$apellido','$marca','$placa','$color','$fecha','$modulo')";

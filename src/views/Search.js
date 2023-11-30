@@ -54,7 +54,7 @@ const Search = ({navigation}) => {
           }
       };
     
-      xhttp.open("GET", "https://ferreous-realinemen.000webhostapp.com/buscarCita.php?nombre="+nombre+
+      xhttp.open("GET", "https://cuceiaccess.000webhostapp.com/buscarCita.php?nombre="+nombre+
       "&apellido="+apellido+"&puerta="+numPuerta, true);
       xhttp.send();
     } else {

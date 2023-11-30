@@ -11,15 +11,8 @@
     
     //variable interna = variable externa
     $puerta = $_GET['puerta'];
-    //datos de conexion
-    $server = "localhost";
-    $user = "id21265121_hector";
-    $pass = "H3ct0r_db";
-    $bd = "id21265121_db_1";
-    $cone = mysqli_connect($server,$user,$pass,$bd);
-    if(!$cone){
-        die("Error al conectar");
-    }
+    //Conexion con la base de datos
+    require_once 'conexion.php';
     //crear la sentencia
     if ($puerta == 1) {
         $sql = "SELECT * FROM Puerta1 WHERE Fecha < '$fechaLimiteInferior' 

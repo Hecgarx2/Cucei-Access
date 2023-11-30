@@ -3,7 +3,8 @@
     header("Content-Type: application/json; charset=UTF-8");
     // Establecer la zona horaria a la deseada (por ejemplo, "America/Mexico_City")
     date_default_timezone_set("America/Mexico_City");
-    
+    //Conexion con la base de datos
+    require_once 'conexion.php';
     // Obtén la fecha actual y la hora actual
     $fechaActual = date('Y-m-d H:i:s');
     $fechaLimiteInferior = date('Y-m-d H:i:s', strtotime('-10 minutes', strtotime($fechaActual)));
@@ -11,15 +12,7 @@
     
     //variable interna = variable externa
     $puerta = $_GET['puerta'];
-    //datos de conexion
-    $server = "localhost";
-    $user = "id21265121_hector";
-    $pass = "H3ct0r_db";
-    $bd = "id21265121_db_1";
-    $cone = mysqli_connect($server,$user,$pass,$bd);
-    if(!$cone){
-        die("Error al conectar");
-    }
+    
     //crear la sentencia
     if ($puerta == 1) {
         $sql = "SELECT * FROM Puerta1 WHERE Fecha BETWEEN '$fechaLimiteInferior' AND '$fechaLimiteSuperior' ORDER BY Fecha";
